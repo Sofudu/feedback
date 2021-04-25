@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect
 from forms.user import FeedbackForm
-
+from smtp import send
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'i always say him that i like chocolate'
 
@@ -12,7 +12,7 @@ def register():
         name = form.name.data
         email = form.email.data
         mess = form.mess.data
-        print(name, email, mess)
+        send.main(name, email, mess)
         return redirect("/thank")
     return render_template('register.html', title='Обратная связь', form=form)
 
